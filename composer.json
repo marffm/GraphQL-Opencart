@@ -1,6 +1,14 @@
 {
+    "name": "GraphQL-Opencart",
+    "description": "GraphQL requests to Opencart API",
+    "authors": [
+        {
+            "name": "Marcelo Martins",
+            "email": "marceloffmartins@hotmail.com"
+        }
+    ],
     "require": {
-        "webonyx/graphql-php": "^0.11.5",
+        "webonyx/graphql-php": "^0.11.5"
     },
     "autoload": {
         "psr-4": {
