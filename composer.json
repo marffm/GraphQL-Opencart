@@ -1,0 +1,42 @@
+{
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://carlosgpd:f33lt1gpd@bitbucket.org/gpdtec/api-core.git",
+			"options": {
+                "ssh2": {
+                    "username": "marcelomartins",
+                    "pubkey_file": "/var/www/kauesantoja/testecomposer/id_rsa.pub",
+                    "privkey_file": "/var/www/kauesantoja/testecomposer/id_rsa"
+                }
+            }
+        },
+        {
+            "type": "git",
+            "url": "https://Marffm@bitbucket.org/gpdtec/cartao_cidadao-integrity.git",
+			"options": {
+                "ssh2": {
+                    "username": "marcelomartins",
+                    "pubkey_file": "/var/www/kauesantoja/testecomposer/id_rsa.pub",
+                    "privkey_file": "/var/www/kauesantoja/testecomposer/id_rsa"
+                }
+            }
+        }
+    ],
+    "require": {
+        "webonyx/graphql-php": "^0.11.5",
+        "gpdtec/api-core":  "dev-master",
+        "gpdtec/cartao_cidadao-integrity": "dev-develop"
+    },
+    "autoload": {
+        "psr-4": {
+           "Gpd\\": "src",
+           "Tests\\": "tests"
+        }
+    },
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    }
+}

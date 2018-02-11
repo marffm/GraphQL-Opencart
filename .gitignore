@@ -1,0 +1,6 @@
+/vendor/
+/public/images/
+/src/settings.php
+/.vscode/
+*.sh
+composer.lock
