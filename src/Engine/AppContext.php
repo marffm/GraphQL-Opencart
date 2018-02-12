@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Engine;
+namespace Src\Engine;
 
 class AppContext {
 
@@ -24,7 +24,7 @@ class AppContext {
      */
     protected function setSettings()
     {
-        $settings = \Gpd\Helpers\File::getFile('settings');
+        $settings = \Src\Helpers\File::getFile('settings');
         if(!$settings){
             throw \GraphQL\Error\Error::createLocatedError(1002);
         }

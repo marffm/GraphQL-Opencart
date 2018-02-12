@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Engine;
+namespace Src\Engine;
 
 final class Security
 {
@@ -65,7 +65,7 @@ final class Security
      */
     private function setSettings()
     {
-        $settings = \Gpd\Helpers\File::getFile('settings');
+        $settings = \Src\Helpers\File::getFile('settings');
         if(!$settings){
             throw \GraphQL\Error\Error::createLocatedError(1002);
         }
@@ -77,7 +77,7 @@ final class Security
      */
     private function setPublicMethods()
     {
-        $publicMethods = \Gpd\Helpers\File::getFile('publicMethods');
+        $publicMethods = \Src\Helpers\File::getFile('publicMethods');
         if(!$publicMethods){
             throw \GraphQL\Error\Error::createLocatedError(1004);
         }
@@ -163,7 +163,7 @@ final class Security
     private function checkActiveApp($payload)
     {
         $args['app_key'] = $payload['app_key'];
-        $modelAplicacoes = new \Gpd\Model\AppCore\AplicacoesModel(null, $args);
+        $modelAplicacoes = new \Src\Model\AppCore\AplicacoesModel(null, $args);
         $aplicacao = $modelAplicacoes->getAplicacoes($args);
         if($aplicacao && $aplicacao['ativo']){
             return true;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Interfaces\Type;
+namespace Src\Interfaces\Type;
 
 interface QueryType
 {

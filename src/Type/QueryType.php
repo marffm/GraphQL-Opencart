@@ -1,13 +1,13 @@
 <?php
 
-namespace Gpd\Type;
+namespace Src\Type;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 
-use Gpd\Helpers\Fields;
+use Src\Helpers\Fields;
 
-use Gpd\Type\RouterTypes;
+use Src\Type\RouterTypes;
 
 
 class QueryType extends ObjectType

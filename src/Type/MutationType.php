@@ -1,9 +1,9 @@
 <?php
 
-namespace Gpd\Type;
+namespace Src\Type;
 
 use GraphQL\Type\Definition\ObjectType;
-use Gpd\Helpers\Fields;
+use Src\Helpers\Fields;
 
 class MutationType extends ObjectType
 {

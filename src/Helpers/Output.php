@@ -1,8 +1,8 @@
 <?php
 
-namespace Gpd\Helpers;
+namespace Src\Helpers;
 
-use Gpd\Helpers\OutputFormatter;
+use Src\Helpers\OutputFormatter;
 
 class Output
 {

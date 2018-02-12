@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Helpers;
+namespace Src\Helpers;
 
 /**
  * This class is responsible by mount fields in 
@@ -16,15 +16,15 @@ class Fields
     public static function getFields(string $functionName)
     {
         $fields = [];
-        $filesList = \Gpd\Helpers\File::getDirectoryFiles('/Type/ApiTypes');
+        $filesList = \Src\Helpers\File::getDirectoryFiles('/Type/ApiTypes');
         foreach($filesList as $file){
             if(!strpos($file, 'Type.php')){
                 continue;
             }
             $className = substr($file, 0, -4);
-            $fullName = '\Gpd\Type\ApiTypes\\' . $className . '::' . $functionName;
+            $fullName = '\Src\Type\ApiTypes\\' . $className . '::' . $functionName;
             // Check if method is callable
-            if(!is_callable(['\Gpd\Type\ApiTypes\\' . $className, $functionName])){
+            if(!is_callable(['\Src\Type\ApiTypes\\' . $className, $functionName])){
                 continue;
             }
             $field = $fullName();

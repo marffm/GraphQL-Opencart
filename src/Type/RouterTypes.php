@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Type;
+namespace Src\Type;
 
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ListOfType;
@@ -26,7 +26,7 @@ class RouterTypes
     public static function returnApiTypes(string $type)
     {
         $name = ucfirst($type) . 'Type';
-        $fullName = '\Gpd\Type\ApiTypes\\' . $name;
+        $fullName = '\Src\Type\ApiTypes\\' . $name;
         if(self::$types[$name]){
             return self::$types[$name];
         }
@@ -50,7 +50,7 @@ class RouterTypes
         if(self::$types[$name]){
             return self::$types[$name];
         }
-        $fullName = '\Gpd\Type\Scalar\\' . $name;
+        $fullName = '\Src\Type\Scalar\\' . $name;
         if(!is_callable([$fullName, 'create'])){
             throw \GraphQL\Error\Error::createLocatedError(1102);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Helpers;
+namespace Src\Helpers;
 
 class Messages
 {
@@ -11,11 +11,11 @@ class Messages
      */
     public static function getMessage(int $cod)
     {
-        $strings = \Gpd\Helpers\File::getFile('strings');
+        $strings = \Src\Helpers\File::getFile('strings');
         if(!$strings[(string)$cod]){
             return $strings['9999'];
         }
-        return $strings[(string)$cod];        
+        return $strings[(string)$cod];
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Engine;
+namespace Src\Engine;
 
 use GraphQL\Error\FormattedError;
 
@@ -20,7 +20,6 @@ class ErrorHandler extends \Exception
             ];
             return $error;
         }
-        echo '<pre>' .json_encode($error). '</pre>';die;
     }
 
 

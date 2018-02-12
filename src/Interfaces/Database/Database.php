@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Interfaces\DataBase;
+namespace Src\Interfaces\DataBase;
 
 interface Database {
 

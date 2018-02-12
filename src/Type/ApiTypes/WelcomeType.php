@@ -1,13 +1,13 @@
 <?php
 
-namespace Gpd\Type\ApiTypes;
+namespace Src\Type\ApiTypes;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 
-use Gpd\Type\RouterTypes;
+use Src\Type\RouterTypes;
 
-class WelcomeType extends \GraphQL\Type\Definition\ObjectType implements \Gpd\Interfaces\Type\QueryType
+class WelcomeType extends \GraphQL\Type\Definition\ObjectType implements \Src\Interfaces\Type\QueryType
 {
 
     public function __construct()

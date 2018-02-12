@@ -1,8 +1,8 @@
 <?php
 
-namespace Gpd\Engine;
+namespace Src\Engine;
 
-class Connection implements \Gpd\Interfaces\Database\Database
+class Connection implements \Src\Interfaces\Database\Database
 {
     /**
      * @var $settings File
@@ -30,13 +30,13 @@ class Connection implements \Gpd\Interfaces\Database\Database
     public function __construct(array $dbInformation, $key = null, $methodName = null)
     {
         // Connection to Security Layer
-        $security = new \Gpd\Engine\Security($key, $methodName);
+        $security = new \Src\Engine\Security($key, $methodName);
         if(!$security->checkSecurity()){
             throw \GraphQL\Error\Error::createLocatedError(1005);
         }
 
         // Initiate connection with Cache
-        $this->cache =  \Gpd\Engine\Cache::cacheInit();
+        $this->cache =  \Src\Engine\Cache::cacheInit();
 
         // Create connection with database based on dbInformation
         $this->connection = $this->connectDataBase($dbInformation);
@@ -54,7 +54,7 @@ class Connection implements \Gpd\Interfaces\Database\Database
     {
         switch ($dbInformation['dbType']){
             case 'mongodb':
-                $connection = new \Gpd\Engine\MongoDb($dbInformation);
+                // Connection with mongo DB
                 break;
             case 'postgres':
                 // Make connection with database

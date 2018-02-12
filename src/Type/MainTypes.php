@@ -1,5 +1,5 @@
 <?php
-namespace Gpd\Type;
+namespace Src\Type;
 
 
 class MainTypes 
@@ -14,7 +14,7 @@ class MainTypes
      */
     public static function query()
     {
-        return self::$query ?: (self::$query = new \Gpd\Type\QueryType());
+        return self::$query ?: (self::$query = new \Src\Type\QueryType());
     }
 
 
@@ -23,7 +23,7 @@ class MainTypes
      */
     public static function mutation()
     {
-        return self::$mutation ?: (self::$mutation = new \Gpd\Type\MutationType());
+        return self::$mutation ?: (self::$mutation = new \Src\Type\MutationType());
     }
 
 }

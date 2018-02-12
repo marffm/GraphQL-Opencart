@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpd\Helpers;
+namespace Src\Helpers;
 
 class GenerateOptions
 {
