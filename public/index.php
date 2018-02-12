@@ -7,7 +7,7 @@ use \GraphQL\GraphQL;
 use \GraphQL\Error\FormattedError;
 use \GraphQL\Error\Debug;
 
-use \Gpd\Type\MainTypes;
+use \Src\Type\MainTypes;
 
 // Disable default PHP error reporting - we have better one for debug mode (see bellow)
 ini_set('display_errors', 0);
@@ -22,7 +22,7 @@ if (!empty($_GET['debug'])) {
 
 try {
 
-    $appContext = new \Gpd\Engine\AppContext;
+    $appContext = new \Src\Engine\AppContext;
 
     // Parse incoming query and variables
     if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
@@ -58,4 +58,4 @@ try {
     ];
 }
 
-return new \Gpd\Helpers\Output($output);
+return new \Src\Helpers\Output($output);
