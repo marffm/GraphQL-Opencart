@@ -12,18 +12,16 @@ class Model
 
     private $methodName;
 
-    private $root;
 
     public function __construct($root = null, $args = null, $context = null, $info = null)
     {
+        if($context){
+            $this->token = $context->getSecurityKey();
+        }        
         // Insert db custom in dbInformation
         if($args['dbCustom']){
             $this->dbInformation['dbCustom'] = $args['dbCustom'];
-        }
-        if($context){
-            // get key from http request
-            $this->token = $context->getSecurityKey();
-        }        
+        }       
     }
 
 
@@ -78,7 +76,7 @@ class Model
      */
     private function startConnection()
     {
-        $this->connection = new \Gpd\Engine\Connection($this->dbInformation, $this->token, $this->methodName);
+        $this->connection = new \Src\Engine\Connection($this->dbInformation, $this->token, $this->methodName);
     }
 
     /**

@@ -39,11 +39,15 @@ final class Cache
     public function setCache(array $data, array $dbInformation)
     {
         $index = $this->setIndex($dbInformation);
-        $dataToCache = $this->formatDataToCache($data, $dbInformation);
-        if($this->cache[$index]){
-            $this->cache[$index] += $dataToCache;
-        } else {
-            $this->cache[$index] = $dataToCache;
+        foreach($data as $single_value){
+            if($single_value[$dbInformation['customId']]){
+                $dataToCache = $this->formatDataToCache($single_value, $dbInformation);
+            }
+            if($this->cache[$index]){
+                $this->cache[$index] += $dataToCache;
+            } else {
+                $this->cache[$index] = $dataToCache;
+            }
         }
     }
 
@@ -88,7 +92,7 @@ final class Cache
             return false;
         }
         $index = $this->setIndex($dbInformation);
-        $id = $this->setId($data);
+        $id = $this->setId($data[0][$dbInformation['customId']]);
         unset($this->cache[$index][$id]);
     }
 
@@ -99,16 +103,10 @@ final class Cache
      * @return array $cache
      */
     protected function formatDataToCache(array $data, array $dbInformation)
-    {       
-        if($data['_id']){
-            $cache = [
-                (string)$data['_id'] => $data
-            ];
-            return $cache;
-        }
-        foreach($data as $value){
-            $cache[(string)$value['_id']] = $value;
-        }
+    {
+        $cache = [
+            (string)$data[$dbInformation['customId']] => $data
+        ];
         return $cache;
     }
 
@@ -119,9 +117,6 @@ final class Cache
      */
     protected function setIndex(array $dbInformation)
     {
-        if($dbInformation['dbCustom']){
-            $dbInformation['database'] = $dbInformation['database'] . $dbInformation['dbCustom'];
-        }
         return $dbInformation['dbType'] . '.' . $dbInformation['database'] . '.' . $dbInformation['collection'];
     }
 
@@ -130,13 +125,10 @@ final class Cache
      * @param array $data
      * @return string $id
      */
-    protected function setId(array $data){
-        if($data['_id']){
-            $id = (string)$data['_id'];
-        } else if($data['id']){
-            $id = (string)$data['id'];
-        } else {
-            return false;
+    protected function setId(array $query)
+    {
+        if($query['id']){
+            $id = $query['id'];
         }
         return $id;
     }

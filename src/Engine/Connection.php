@@ -23,6 +23,13 @@ class Connection implements \Src\Interfaces\Database\Database
 
 
     /**
+     * Settings db Informations
+     * @var array $context
+     */
+    private $dbSettings;
+
+
+    /**
      * Create Connection with database
      * @param array $dbInformation - Informations about the database connection
      * @return object $this->dbConnection
@@ -35,6 +42,9 @@ class Connection implements \Src\Interfaces\Database\Database
             throw \GraphQL\Error\Error::createLocatedError(1005);
         }
 
+        // Set Db Settings
+        $this->setDbSettings();
+
         // Initiate connection with Cache
         $this->cache =  \Src\Engine\Cache::cacheInit();
 
@@ -42,6 +52,7 @@ class Connection implements \Src\Interfaces\Database\Database
         $this->connection = $this->connectDataBase($dbInformation);
 
         $this->dbInformation = $dbInformation;
+
         return $this;
     }
 
@@ -60,11 +71,24 @@ class Connection implements \Src\Interfaces\Database\Database
                 // Make connection with database
                 break;
             case 'external':
-                // CREATE CURL CLASS TO MAKE EXTERNAL REQUESTS
+                $connection = new \Src\Engine\External($dbInformation, $this->dbSettings['external']);
                 break;
         }
         return $connection;
     }
+
+    /**
+     * Get settings File
+     */
+    private function setDbSettings()
+    {
+        $settings = \Src\Helpers\File::getFile('settings');
+        if(!$settings){
+            throw \GraphQL\Error\Error::createLocatedError(1002);
+        }
+        $this->dbSettings = $settings['settings']['database'];
+    }
+
 
     /**
      * Access read function in database Connection
@@ -74,8 +98,8 @@ class Connection implements \Src\Interfaces\Database\Database
     public function read(array $query = [], array $options = [])
     {
         // search in cache before search in database
-        $cached = $this->cache->getCache($query, $this->dbInformation);
-        if($cached) {
+        $cached[] = $this->cache->getCache($query, $this->dbInformation);
+        if($cached[0]) {
             return $cached;
         }
         // if there's no cache, search in database connection
@@ -96,7 +120,7 @@ class Connection implements \Src\Interfaces\Database\Database
         if(!$result){
             throw \GraphQL\Error\Error::createLocatedError(1203);
         }
-        $query['_id'] = $result;
+        $query['id'] = $result;
         $response = $this->read($query);
         return $response;
     }

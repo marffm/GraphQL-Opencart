@@ -16,7 +16,7 @@ class ErrorHandler extends \Exception
         if(isset($data['errors'][0]['message'])){
             $error = [
                 'cod' => (int)$data['errors'][0]['message'],
-                'msg' => \Gpd\Helpers\Messages::getMessage((int)$data['errors'][0]['message'])
+                'msg' => \Src\Helpers\Messages::getMessage((int)$data['errors'][0]['message'])
             ];
             return $error;
         }

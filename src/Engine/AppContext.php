@@ -16,20 +16,20 @@ class AppContext {
     public function __construct()
     {
         $this->setSecurity();
-        $this->setSettings();
+        // $this->setSettings();
     }
 
     /**
      * Set settings file in settings variable
      */
-    protected function setSettings()
-    {
-        $settings = \Src\Helpers\File::getFile('settings');
-        if(!$settings){
-            throw \GraphQL\Error\Error::createLocatedError(1002);
-        }
-        $this->settings = $settings;
-    }
+    // protected function setSettings()
+    // {
+    //     $settings = \Src\Helpers\File::getFile('settings');
+    //     if(!$settings){
+    //         throw \GraphQL\Error\Error::createLocatedError(1002);
+    //     }
+    //     $this->settings = $settings;
+    // }
 
     /**
      * Set Security Informations
@@ -53,9 +53,9 @@ class AppContext {
      * Returns Settings
      * @return array $settings
      */
-    public function getSettings(string $name)
-    {
-        return $this->settings['settings'][$name];
-    }
+    // public function getSettings(string $name)
+    // {
+    //     return $this->settings['settings'][$name];
+    // }
 
 }

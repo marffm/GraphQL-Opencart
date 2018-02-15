@@ -1,13 +1,13 @@
 <?php
 
-namespace Gpd\Type\ApiTypes;
+namespace Src\Type\ApiTypes;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 
-use Gpd\Type\RouterTypes;
+use Src\Type\RouterTypes;
 
-class TemaType extends ObjectType implements \Gpd\Interfaces\Type\QueryType, \Gpd\Interfaces\Type\MutationType
+class TemaType extends ObjectType implements \Src\Interfaces\Type\QueryType, \Src\Interfaces\Type\MutationType
 {
 
     public function __construct()
@@ -17,7 +17,7 @@ class TemaType extends ObjectType implements \Gpd\Interfaces\Type\QueryType, \Gp
             'description' => 'Tipos do Tema',
             'fields' => function() {
                 return [
-                    '_id' => RouterTypes::returnScalarType('Id'),
+                    '_id' => RouterTypes::string(),
                     'descricao' => RouterTypes::string(),
                     'icone' => RouterTypes::string(),
                     'assuntos' => [
@@ -183,7 +183,7 @@ class TemaType extends ObjectType implements \Gpd\Interfaces\Type\QueryType, \Gp
                         'description' => 'Icone do Tema é uma string'
                     ],
                     'assuntos' => [
-                        'type' => RouterTypes::listOf(\Gpd\Type\ApiTypes\AssuntoType::exportInputType('insertAssunto')),
+                        'type' => RouterTypes::listOf(\Src\Type\ApiTypes\AssuntoType::exportInputType('insertAssunto')),
                         'description' => 'Descricao dos Assuntos'
                     ],
                     'dbCustom' => [
