@@ -7,7 +7,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 use Src\Type\RouterTypes;
 
-class WelcomeType extends \GraphQL\Type\Definition\ObjectType implements \Src\Interfaces\Type\QueryType
+class WelcomeType extends \GraphQL\Type\Definition\ObjectType
 {
 
     public function __construct()

@@ -57,7 +57,7 @@ final class Cache
      * @param array $dbInformation
      * @return array|false
      */
-    public function getCache(array $query, array $dbInformation)
+    public function getCache(string $query, array $dbInformation)
     {
         if(!$this->cache){
             return false;
@@ -125,12 +125,14 @@ final class Cache
      * @param array $data
      * @return string $id
      */
-    protected function setId(array $query)
+    protected function setId(string $query)
     {
-        if($query['id']){
-            $id = $query['id'];
-        }
-        return $id;
+
+        echo '<pre>' .json_encode('inside setId Cache'). '</pre>';die;
+        // if($query['id']){
+        //     $id = $query['id'];
+        // }
+        // return $id;
     }
 
 }

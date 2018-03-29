@@ -9,8 +9,8 @@ class ApiModel extends \Src\Engine\Model
      * Carries information about connection to dataBase
      */
     protected $dbInformation = [
-        'dbType' => 'external',
-        'database' => 'opencart',
+        'dbType' => 'mysql',
+        'database' => 'loja',
         'collection' => 'api',
         'serverConnection' => 'default',
         'customId' => 'api_id'
@@ -24,14 +24,15 @@ class ApiModel extends \Src\Engine\Model
      */
     public function getApis(array $args = null) : array
     {
-        $query = \Src\Helpers\QueryGenerator::generateQuery($args);
-        $response = $this->read($query);
+        $query = "SELECT * FROM api";
+        return $this->read($query);
+        
 
 
         // To Read values inside cache
-        $cache = \Src\Engine\Cache::cacheInit();
-        $query['id'] = 1;
-        echo "<pre>" . print_r($cache->getCache($query, $this->dbInformation),true) . "</pre>";die;
+        // $cache = \Src\Engine\Cache::cacheInit();
+        // $query['id'] = 1;
+        // echo "<pre>" . print_r($cache->getCache($query, $this->dbInformation),true) . "</pre>";die;
     }
 
 }
