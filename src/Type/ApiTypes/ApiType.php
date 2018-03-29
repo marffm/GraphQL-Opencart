@@ -5,7 +5,7 @@ namespace Src\Type\ApiTypes;
 use GraphQL\Type\Definition\ObjectType;
 use Src\Type\RouterTypes;
 
-class ApiType extends ObjectType implements \Src\Interfaces\Type\QueryType, \Src\Interfaces\Type\MutationType
+class ApiType extends ObjectType implements \Src\Interfaces\Type\QueryType
 {
 
 
@@ -36,7 +36,7 @@ class ApiType extends ObjectType implements \Src\Interfaces\Type\QueryType, \Src
     {
         return [
             'getApis' => [
-                'type' => RouterTypes::returnApiTypes('Api'),
+                'type' => RouterTypes::listOf(RouterTypes::returnApiTypes('Api')),
                 'description' => 'Api Register from opencart.',
                 'args' => [
                     'fields' => [
@@ -44,20 +44,11 @@ class ApiType extends ObjectType implements \Src\Interfaces\Type\QueryType, \Src
                     ]
                 ],
                 'resolve' => function ($config, $args, $context) {
-                    $apiModel = new \Src\Model\ApiModel($config, $args, $context);
-                    $response = $apiModel->getApis($args['fields']);
+                    $apiModel = new \Src\Model\ApiModel($context);
+                    return $apiModel->getApis($args['fields']);
                 }
             ]
         ];
-    }
-
-    /**
-     * Returns Mutation Types
-     * @return array
-     */
-    public static function exportMutationType()
-    {
-
     }
 
     /**

@@ -10,18 +10,15 @@ class Model
 
     private $token;
 
-    private $methodName;
+    private $publicMethodName;
+
+    protected $context;
 
 
-    public function __construct($root = null, $args = null, $context = null, $info = null)
+    public function __construct($context)
     {
-        if($context){
-            $this->token = $context->getSecurityKey();
-        }        
-        // Insert db custom in dbInformation
-        if($args['dbCustom']){
-            $this->dbInformation['dbCustom'] = $args['dbCustom'];
-        }       
+        $this->context = $context;
+        $this->token = $context->getSecurityKey();
     }
 
 
@@ -31,10 +28,10 @@ class Model
      * @param array $query
      * @return array
      */
-    protected function read(array $query = [], array $options = [])
+    protected function read(string $query)
     {
         $this->startConnection();
-        return $this->connection->read($query, $options);
+        return $this->connection->read($query);
     }
 
     /**
@@ -80,12 +77,12 @@ class Model
     }
 
     /**
-     * Set methodName
-     * @param string $methodName
+     * Its used to access methods that will not be necessary app key to work
+     * @param string $publicMethodName
      */
-    protected function setMethodName(string $methodName)
+    protected function setPublicMethodName(string $publicMethodName)
     {
-        $this->methodName = $methodName;
+        $this->publicMethodName = $publicMethodName;
     }
 
 

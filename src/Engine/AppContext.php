@@ -5,38 +5,22 @@ namespace Src\Engine;
 class AppContext {
 
     /**
-     * System's settings file
-     * @var array 
+     * Api key
      */
-    protected $settings;
-
     protected $security;
 
 
     public function __construct()
     {
         $this->setSecurity();
-        // $this->setSettings();
     }
-
-    /**
-     * Set settings file in settings variable
-     */
-    // protected function setSettings()
-    // {
-    //     $settings = \Src\Helpers\File::getFile('settings');
-    //     if(!$settings){
-    //         throw \GraphQL\Error\Error::createLocatedError(1002);
-    //     }
-    //     $this->settings = $settings;
-    // }
 
     /**
      * Set Security Informations
      */
     protected function setSecurity()
     {
-        $this->securityKey = $_SERVER['HTTP_APPKEY'] ?: false;
+        $this->securityKey = $_SERVER['HTTP_APPKEY'] ?: null;
     }
 
 
@@ -48,14 +32,5 @@ class AppContext {
     {
         return $this->securityKey;
     }
-
-    /**
-     * Returns Settings
-     * @return array $settings
-     */
-    // public function getSettings(string $name)
-    // {
-    //     return $this->settings['settings'][$name];
-    // }
 
 }

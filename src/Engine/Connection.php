@@ -34,10 +34,10 @@ class Connection implements \Src\Interfaces\Database\Database
      * @param array $dbInformation - Informations about the database connection
      * @return object $this->dbConnection
      */
-    public function __construct(array $dbInformation, $key = null, $methodName = null)
+    public function __construct(array $dbInformation, $key = null, $publicMethodName = null)
     {
         // Connection to Security Layer
-        $security = new \Src\Engine\Security($key, $methodName);
+        $security = new \Src\Engine\Security($key, $publicMethodName);
         if(!$security->checkSecurity()){
             throw \GraphQL\Error\Error::createLocatedError(1005);
         }
@@ -70,6 +70,9 @@ class Connection implements \Src\Interfaces\Database\Database
             case 'postgres':
                 // Make connection with database
                 break;
+            case 'mysql':
+                $connection = new \Src\Engine\MySqlDb($dbInformation, $this->dbSettings['mysql']);
+                break;
             case 'external':
                 $connection = new \Src\Engine\External($dbInformation, $this->dbSettings['external']);
                 break;
@@ -78,7 +81,7 @@ class Connection implements \Src\Interfaces\Database\Database
     }
 
     /**
-     * Get settings File
+     * Get settings file and insert database data into dbSettings Variable
      */
     private function setDbSettings()
     {
@@ -95,10 +98,10 @@ class Connection implements \Src\Interfaces\Database\Database
      * @param array $query
      * @param array $options
      */
-    public function read(array $query = [], array $options = [])
+    public function read(string $query)
     {
         // search in cache before search in database
-        $cached[] = $this->cache->getCache($query, $this->dbInformation);
+        // $cached[] = $this->cache->getCache($query, $this->dbInformation);
         if($cached[0]) {
             return $cached;
         }
@@ -114,7 +117,7 @@ class Connection implements \Src\Interfaces\Database\Database
      * Access create function in database Connection
      * @param array $dados
      */
-    public function save(array $data)
+    public function save($data)
     {
         $result = $this->connection->save($data);
         if(!$result){
@@ -130,7 +133,7 @@ class Connection implements \Src\Interfaces\Database\Database
      * @param array $dados
      * @param array $query
      */
-    public function update(array $update, array $query)
+    public function update($update, $query)
     {
         $result = $this->connection->update($update, $query);
         if(!$result){
@@ -144,7 +147,7 @@ class Connection implements \Src\Interfaces\Database\Database
      * Access delete function in database
      * @param array $query
      */
-    public function delete(array $query)
+    public function delete($query)
     {
         $data = $this->read($query);
         if(!$data){

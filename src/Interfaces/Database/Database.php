@@ -4,12 +4,12 @@ namespace Src\Interfaces\DataBase;
 
 interface Database {
 
-    public function save(array $dados);
+    public function save($data);
 
-    public function read(array $query, array $options);
+    public function read(string $query);
 
-    public function update(array $dados, array $query);
+    public function update($data, $query);
 
-    public function delete(array $query);
+    public function delete($query);
     
 }
